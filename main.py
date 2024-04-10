@@ -23,6 +23,24 @@ MOVE_VEL = 20
 WINDOW = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('2048')
 
+def draw_grid(window):
+    for row in range(1, ROWS):
+        y = row * RECT_HEIGHT
+        pygame.draw.line(window, OUTLINE_COLOUR, (0, y), (WIDTH, y), OUTLINE_THICKNESS)
+    
+    for col in range(1, COLS):
+        x = col * RECT_WIDTH
+        pygame.draw.line(window, OUTLINE_COLOUR, (x, 0), (x, HEIGHT), OUTLINE_THICKNESS)
+
+    pygame.draw.rect(window, OUTLINE_COLOUR, (0 ,0, WIDTH, HEIGHT), OUTLINE_THICKNESS)
+
+def draw(window):
+    window.fill(BACKGROUND_COLOUR)
+
+    draw_grid(window)
+
+    pygame.display.update()
+
 def main(window):
     clock = pygame.time.Clock()
     run = True
@@ -34,6 +52,8 @@ def main(window):
             if event.type == pygame.QUIT:
                 run = False
                 break 
+
+        draw(window)
     
     pygame.quit()
 
